@@ -1,32 +1,131 @@
 <!DOCTYPE html>
-<html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>INNOVA.GLOBAL</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><style>.gold{color:#FFD700}.bg-gold{background:#FFD700}.border-gold{border-color:#FFD700}.hidden{display:none}</style></head><body class="bg-black text-white">
-
-<header class="flex justify-between p-4 border-b border-zinc-800 sticky top-0 bg-black z-50"><b class="gold">INNOVA.GLOBAL</b><div class="flex gap-2 text-xs"><button onclick="showPage('welcome')" class="border border-gold gold px-3 py-1 rounded-full">HOME</button><button onclick="showPage('login')" class="bg-gold text-black px-3 py-1 rounded-full font-bold">LOGIN</button></div></header>
-
-<div id="welcome" class="block text-center p-6 max-w-2xl mx-auto"><p class="gold text-xs">بِسْمِ اللهِ الرَّحْمٰنِ الرَّحِيْمِ</p><h1 class="text-4xl font-black mt-4">Welcome to<br><span class="gold">INNOVA.GLOBAL</span></h1><p class="text-gray-500 text-xs tracking-[0.3em] mt-2">CONNECT • LEARN • GROW</p><div class="flex justify-center gap-3 mt-8"><button onclick="showPage('register')" class="bg-gold text-black px-8 py-3 rounded-full font-bold text-sm">CREATE ACCOUNT</button><button onclick="showPage('login')" class="border border-gold gold px-8 py-3 rounded-full font-bold text-sm">LOGIN</button></div><div class="grid grid-cols-2 gap-3 mt-10"><div class="bg-zinc-900 border border-gold rounded-2xl p-5"><p id="tm" class="text-3xl font-black gold">1</p><p class="text-xs text-gray-400">Total Members</p></div><div class="bg-zinc-900 border border-gold rounded-2xl p-5"><p id="am" class="text-3xl font-black gold">1</p><p class="text-xs text-gray-400">Active Members</p></div></div><div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-5 mt-6 text-left"><h3 class="gold font-bold text-sm">Official Support</h3><div class="flex flex-wrap gap-2 mt-3"><a href="https://t.me/powernetwork7xofficialchannel" target="_blank" class="bg-[#229ED9] px-5 py-2 rounded-full text-xs font-bold">Telegram Channel</a><a href="https://www.youtube.com/@PowerNetwork7X" target="_blank" class="bg-red-600 px-5 py-2 rounded-full text-xs font-bold">YouTube @PowerNetwork7X</a><a href="tel:01313213083" class="border border-gold gold px-5 py-2 rounded-full text-xs font-bold">01313213083</a></div><p class="text-xs bg-black p-3 rounded-xl mt-3"><span class="text-gray-400">bKash Personal 200TK:</span> <b class="gold">01313213083</b></p></div></div>
-
-<div id="register" class="hidden p-4 flex justify-center"><div class="w-full max-w-md bg-zinc-900 border border-yellow-500 rounded-2xl p-6"><h2 class="text-center gold font-bold">CREATE ACCOUNT</h2><input id="r_name" placeholder="Full Name" class="w-full mt-6 p-3 rounded bg-black border border-zinc-700"><input id="r_mobile" placeholder="Mobile" class="w-full mt-3 p-3 rounded bg-black border border-zinc-700"><input id="r_pass" type="password" placeholder="Password" class="w-full mt-3 p-3 rounded bg-black border border-zinc-700"><input id="r_ref" placeholder="Referral ID (Optional)" class="w-full mt-3 p-3 rounded bg-black border border-zinc-700"><button onclick="doRegister()" id="r_btn" class="w-full mt-6 bg-gold text-black font-bold p-3 rounded-xl">Create</button><p class="text-center text-xs mt-3">Have account? <span onclick="showPage('login')" class="gold cursor-pointer">Login</span></p></div></div>
-
-<div id="login" class="hidden p-4 flex justify-center"><div class="w-full max-w-md bg-zinc-900 border border-yellow-500 rounded-2xl p-6"><h2 class="text-center gold font-bold">LOGIN</h2><input id="l_mobile" placeholder="Mobile" class="w-full mt-6 p-3 rounded bg-black border border-zinc-700"><input id="l_pass" type="password" placeholder="Password" class="w-full mt-3 p-3 rounded bg-black border border-zinc-700"><button onclick="doLogin()" class="w-full mt-6 bg-gold text-black font-bold p-3 rounded-xl">Login</button><p id="l_msg" class="text-center text-xs text-red-400 mt-2"></p><p class="text-[11px] text-gray-500 mt-4 text-center">Root Admin: 01313213083 / Admin@123 - ID 000001</p></div></div>
-
-<div id="dashboard" class="hidden p-4 max-w-md mx-auto"><div class="bg-zinc-900 border border-gold rounded-2xl p-4 flex justify-between"><div><p id="d_name" class="font-bold">--</p><p id="d_id" class="text-xs gold">ID: --</p><p id="d_st" class="text-xs">Status: --</p></div><div class="text-right"><p id="d_bal" class="gold font-bold">0 TK</p><button onclick="logout()" class="text-xs text-gray-400">Logout</button><button id="toAdmin" onclick="showPage('admin')" class="hidden bg-gold text-black text-xs px-3 py-1 rounded-full font-bold mt-1">ADMIN</button></div></div><div id="payBox" class="bg-zinc-900 border border-gold rounded-2xl p-4 mt-4"><p class="gold font-bold text-sm">Active Your Account - 200 TK</p><p class="text-xs text-gray-400">bKash 01313213083 Send Money</p><input id="trx" placeholder="TrxID দিন" class="w-full mt-3 p-3 rounded bg-black border border-zinc-700"><button onclick="submitPay()" class="w-full mt-3 bg-gold text-black font-bold p-3 rounded-xl text-sm">Submit Payment</button><p id="payMsg" class="text-xs text-center mt-2"></p></div><div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 mt-4"><p class="text-xs font-bold">Your Referral Link</p><p id="refLink" class="text-[11px] bg-black p-2 rounded mt-2 break-all text-gray-400"></p><button onclick="copyLink()" class="w-full mt-2 bg-zinc-800 p-2 rounded text-xs">Copy Link</button></div></div>
-
-<div id="admin" class="hidden p-4 max-w-4xl mx-auto"><h2 class="gold font-black text-center">ROOT ADMIN - 000001</h2><div class="grid grid-cols-2 gap-3 mt-4"><div class="bg-zinc-900 border border-gold p-4 rounded-xl text-center"><p id="a_total" class="text-2xl font-black gold">0</p><p class="text-xs">Total Members</p></div><div class="bg-zinc-900 border border-gold p-4 rounded-xl text-center"><p id="a_pending" class="text-2xl font-black gold">0</p><p class="text-xs">Pending</p></div></div><div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 mt-4"><h3 class="text-sm font-bold">Pending Payments</h3><div id="pendingList" class="mt-3"></div></div><div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 mt-4"><h3 class="text-sm font-bold">All Members</h3><div id="allMembers" class="mt-3 text-xs"></div></div></div>
-
+<html lang="bn">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>INNOVA.GLOBAL - Permanent</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
+body{background:#07080a;display:flex;justify-content:center}
+.app{width:100%;max-width:400px;background:#0f1012;min-height:100vh;border-left:1px solid #1e1e1e;border-right:1px solid #1e1e1e;padding:20px}
+.gold{color:#E8C77A}.bg-gold{background:#E8C77A;color:#000;font-weight:900}
+.btn{width:100%;padding:16px;border-radius:14px;border:none;font-weight:900;margin-top:12px;cursor:pointer}
+.card{background:#000;border:1px solid #222;border-radius:16px;padding:16px;margin-top:12px}
+input{width:100%;padding:15px;background:#000;border:1px solid #333;border-radius:12px;color:#fff;margin-top:10px}
+.hidden{display:none}
+</style>
+</head>
+<body>
 <script>
-const supa=supabase.createClient("https://emnnltbzxzdutnisvzni.supabase.co","sb_publishable_HJLbbhiiukwMjbhNDKfZOw_JyLRXgXj");
-function showPage(id){['welcome','register','login','dashboard','admin'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id=='welcome')loadStats();if(id=='dashboard')loadDash();if(id=='admin')loadAdmin();}
-async function loadStats(){try{let {count:t}=await supa.from('profiles').select('*',{count:'exact',head:true});let {count:a}=await supa.from('profiles').select('*',{count:'exact',head:true}).eq('status','ACTIVE');document.getElementById('tm').innerText=t||1;document.getElementById('am').innerText=a||1;}catch(e){}}
-let cur=null;
-async function getNext(){let {data}=await supa.from('profiles').select('innova_id').order('innova_id',{ascending:false}).limit(1);if(!data||!data.length)return "000002";return String(parseInt(data[0].innova_id)+1).padStart(6,'0');}
-async function doRegister(){let n=document.getElementById('r_name').value,m=document.getElementById('r_mobile').value,p=document.getElementById('r_pass').value,r=document.getElementById('r_ref').value;if(!n||!m||!p)return alert("সব পূরণ করো");document.getElementById('r_btn').innerText="Wait...";let nid=await getNext();let {error}=await supa.from('profiles').insert({innova_id:nid,full_name:n,mobile:m,password:p,referral_id:r||null,upline_id:r||null,role:'member',status:'PENDING',balance:0});if(error){alert(error.message);document.getElementById('r_btn').innerText="Create";}else{localStorage.setItem('mobile',m);localStorage.setItem('innova_id',nid);showPage('dashboard');}}
-async function doLogin(){let m=document.getElementById('l_mobile').value,p=document.getElementById('l_pass').value;let {data}=await supa.from('profiles').select('*').eq('mobile',m).eq('password',p).single();if(!data){document.getElementById('l_msg').innerText="Wrong Mobile/Password";return;}localStorage.setItem('mobile',m);localStorage.setItem('innova_id',data.innova_id);if(data.innova_id=='000001')showPage('admin');else showPage('dashboard');}
-async function loadDash(){let m=localStorage.getItem('mobile');if(!m)return showPage('login');let {data}=await supa.from('profiles').select('*').eq('mobile',m).single();if(!data)return showPage('login');cur=data;document.getElementById('d_name').innerText=data.full_name;document.getElementById('d_id').innerText="ID: "+data.innova_id;document.getElementById('d_st').innerText="Status: "+data.status;document.getElementById('d_bal').innerText=data.balance+" TK";document.getElementById('refLink').innerText=location.href.split('?')[0]+"?ref="+data.innova_id;if(data.status=='ACTIVE')document.getElementById('payBox').style.display='none';if(data.innova_id=='000001')document.getElementById('toAdmin').classList.remove('hidden');}
-async function submitPay(){let trx=document.getElementById('trx').value.trim();if(!trx)return alert("TrxID দাও");let {error}=await supa.from('payments').insert({member_id:cur.id,innova_id:cur.innova_id,amount:200,trx_id:trx,status:'pending'});if(error)document.getElementById('payMsg').innerText=error.message;else document.getElementById('payMsg').innerText="✅ Submitted! Admin Approve করবে";}
-function copyLink(){navigator.clipboard.writeText(document.getElementById('refLink').innerText);alert("Copied!");}
-async function loadAdmin(){let iid=localStorage.getItem('innova_id');if(iid!=='000001'){alert("Only Root Admin 000001");return showPage('welcome');}let {count:t}=await supa.from('profiles').select('*',{count:'exact',head:true});document.getElementById('a_total').innerText=t||0;let {data:pend}=await supa.from('payments').select('*,profiles(full_name)').eq('status','pending');document.getElementById('a_pending').innerText=pend?.length||0;let h='';pend?.forEach(p=>{h+=`<div class="bg-black border border-zinc-700 p-3 rounded-xl mt-2 flex justify-between items-center text-xs"><div><b>${p.innova_id}</b> - ${p.profiles?.full_name}<br>Trx: ${p.trx_id}</div><button onclick="approve('${p.id}','${p.innova_id}')" class="bg-gold text-black px-3 py-1 rounded font-bold">Approve</button></div>`;});document.getElementById('pendingList').innerHTML=h||"No pending";let {data:all}=await supa.from('profiles').select('*').order('innova_id');let h2='';all?.forEach(u=>{h2+=`<div class="flex justify-between bg-black p-2 rounded mt-1"><span>${u.innova_id} - ${u.full_name} - ${u.status}</span><span>${u.mobile}</span></div>`;});document.getElementById('allMembers').innerHTML=h2;}
-async function approve(pid,iid){if(!confirm("Approve "+iid+"?"))return;await supa.from('payments').update({status:'approved'}).eq('id',pid);await supa.from('profiles').update({status:'ACTIVE',balance:50}).eq('innova_id',iid);alert("Approved!");loadAdmin();}
-function logout(){localStorage.clear();showPage('welcome');}
-let refQ=new URLSearchParams(location.search).get('ref');if(refQ){showPage('register');document.getElementById('r_ref').value=refQ;}
-loadStats();let saved=localStorage.getItem('mobile');if(saved){let iid=localStorage.getItem('innova_id');if(iid=='000001')showPage('admin');else showPage('dashboard');}
-</script></body></html>
+const SUPABASE_URL="https://emnnltbzxzdutnisvzni.supabase.co";
+const SUPABASE_KEY="sb_publishable_HJLbbhiiukwMjbhNDKfZOw_JyLRXgXj";
+const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+let temp={};
+function show(id){['welcome','register','payment','login','dash','admin'].forEach(x=>document.getElementById(x).classList.add('hidden'));document.getElementById(id).classList.remove('hidden');if(id=='admin')loadAdmin();}
+
+async function goPayment(){
+ let n=document.getElementById('r_name').value.trim();
+ let m=document.getElementById('r_mobile').value.trim();
+ let p=document.getElementById('r_pass').value.trim();
+ if(!n||!m||!p){alert("Name, Mobile, Password দাও");return;}
+ temp={name:n,mobile:m,pass:p,ref:document.getElementById('r_ref').value.trim()};
+ show('payment');
+}
+
+async function createID(){
+ let sender=document.getElementById('p_sender').value.trim();
+ let trx=document.getElementById('p_trx').value.trim();
+ let btn=document.getElementById('create_btn');
+ btn.innerText="Creating..."; btn.disabled=true;
+ try{
+   let {data:all} = await supabaseClient.from('members').select('innova_id').order('id',{ascending:true});
+   let nextID = (!all||all.length==0)? "000001" : String(all.length+1).padStart(6,'0');
+   let isFirst = nextID=="000001";
+   if(!isFirst && (!sender||!trx)){alert("Sender & TrxID দাও"); btn.innerText="SUBMIT"; btn.disabled=false; return;}
+   let {error} = await supabaseClient.from('members').insert([{
+     innova_id:nextID,name:temp.name,mobile:temp.mobile,pass:temp.pass,ref:temp.ref,sender:sender||"FREE FOR 000001",trx:trx||"FREE FOR 000001",status:isFirst?"ACTIVE":"PENDING",role:isFirst?"admin":"member"
+   }]);
+   if(error) throw error;
+   alert(isFirst?"✅ ROOT 000001 CREATED Permanent!":"✅ ID "+nextID+" Created - PENDING");
+   show('login');
+ }catch(e){alert("Error: "+e.message+" - Table বানিয়েছো তো? SQL Run করো"); }
+ btn.innerText="SUBMIT → ID CREATE হবে"; btn.disabled=false;
+}
+
+async function doLogin(){
+ let m=document.getElementById('l_mobile').value.trim();
+ let p=document.getElementById('l_pass').value.trim();
+ let {data,error}= await supabaseClient.from('members').select('*').eq('mobile',m).eq('pass',p).single();
+ if(error||!data){alert("Mobile/Password ভুল");return;}
+ if(data.status!="ACTIVE"){alert("PENDING - 000001 Approve করবে");return;}
+ localStorage.setItem('current_user',JSON.stringify(data));
+ document.getElementById('d_name').innerText=data.name;
+ document.getElementById('d_id').innerText="ID: "+data.innova_id;
+ document.getElementById('d_role').innerText=data.innova_id=="000001"?"ROOT ADMIN - ভিতরে Admin আছে":"MEMBER - Package 15 Days";
+ if(data.innova_id=="000001")document.getElementById('admin_btn').classList.remove('hidden');
+ else document.getElementById('admin_btn').classList.add('hidden');
+ show('dash');
+}
+
+async function loadAdmin(){
+ let cur=JSON.parse(localStorage.getItem('current_user')||'{}');
+ if(cur.innova_id!="000001"){alert("Only 000001");show('welcome');return;}
+ let {data:members}= await supabaseClient.from('members').select('*').order('id',{ascending:true});
+ let pend=members.filter(x=>x.status=="PENDING");
+ document.getElementById('a_total').innerText=members.length;
+ document.getElementById('a_pending').innerText=pend.length;
+ document.getElementById('pending_list').innerHTML=pend.map(x=>`<div class="card" style="border-color:#E8C77A"><b class="gold">${x.innova_id}</b> - ${x.name}<br>Mobile:${x.mobile}<br>Sender:${x.sender}<br>Trx:${x.trx}<br><button onclick="approve('${x.innova_id}')" class="btn bg-gold" style="padding:10px">APPROVE</button></div>`).join('')||"<p style='text-align:center;color:gray;padding:20px'>No Pending ✅</p>";
+ document.getElementById('all_list').innerHTML=members.map(x=>`<div class="card" style="display:flex;justify-content:space-between;font-size:12px"><span class="gold">${x.innova_id}</span><span>${x.name}</span><span style="color:${x.status=='ACTIVE'?'#4ade80':'#facc15'}">${x.status}</span></div>`).join('');
+}
+
+async function approve(id){
+ let {error}= await supabaseClient.from('members').update({status:"ACTIVE"}).eq('innova_id',id);
+ if(error){alert(error.message);return;}
+ alert("Approved "+id); loadAdmin();
+}
+</script>
+
+<div id="welcome" class="app">
+<h1 style="text-align:center;letter-spacing:4px;margin-top:20px">INNOVA.<span class="gold">GLOBAL</span></h1>
+<p style="text-align:center;margin-top:20px;font-weight:900">Welcome to<br><span class="gold">INNOVA.GLOBAL</span></p>
+<button class="btn bg-gold" onclick="show('register')">CREATE ACCOUNT</button>
+<button class="btn" style="background:#1e1e1e;color:#E8C77A;border:2px solid #E8C77A" onclick="show('login')">LOGIN</button>
+<div class="card"><p class="gold" style="font-size:12px">System: 000001 Auto Active + Admin Inside, 000002+ Need Approval | Permanent DB</p></div>
+</div>
+
+<div id="register" class="app hidden">
+<h2 style="text-align:center">Create Account</h2>
+<input id="r_name" placeholder="Full Name *"><input id="r_mobile" placeholder="Mobile *"><input id="r_pass" type="password" placeholder="Password *"><input id="r_ref" placeholder="Referral ID (First এ খালি)">
+<button class="btn bg-gold" onclick="goPayment()">NEXT → PAYMENT</button>
+<button class="btn" style="background:#222;color:#fff" onclick="show('welcome')">Back</button>
+</div>
+
+<div id="payment" class="app hidden">
+<h2 style="text-align:center">Payment - 200 TK</h2>
+<div class="card" style="text-align:center;border-color:#E8C77A"><p>bKash Personal</p><p class="gold" style="font-size:24px;font-weight:900">01313213083</p><p style="font-size:10px;color:gray">First ID 000001 Free</p></div>
+<input id="p_sender" placeholder="Sender Number"><input id="p_trx" placeholder="TrxID">
+<button id="create_btn" class="btn bg-gold" onclick="createID()">SUBMIT → ID CREATE হবে</button>
+</div>
+
+<div id="login" class="app hidden">
+<h2 style="text-align:center;margin-top:30px">LOGIN</h2>
+<input id="l_mobile" placeholder="Mobile"><input id="l_pass" type="password" placeholder="Password">
+<button class="btn bg-gold" onclick="doLogin()">LOGIN</button>
+</div>
+
+<div id="dash" class="app hidden">
+<h2 id="d_name" style="text-align:center">--</h2><p id="d_id" style="text-align:center" class="gold">--</p><p id="d_role" style="text-align:center;font-size:11px;color:gray">--</p>
+<button id="admin_btn" class="btn bg-gold hidden" onclick="show('admin')">ADMIN PANEL - ONLY INSIDE 000001</button>
+<button class="btn" style="background:#222;color:#fff" onclick="show('welcome')">Logout</button>
+</div>
+
+<div id="admin" class="app hidden">
+<h2 style="text-align:center">ADMIN PANEL (000001)</h2>
+<div style="display:flex;gap:10px;margin-top:10px"><div class="card" style="flex:1;text-align:center"><p id="a_total" class="gold">0</p><p style="font-size:10px">Total</p></div><div class="card" style="flex:1;text-align:center"><p id="a_pending" class="gold">0</p><p style="font-size:10px">Pending</p></div></div>
+<div id="pending_list"></div><div id="all_list"></div>
+<button class="btn" style="background:#222;color:#fff" onclick="show('dash')">Back</button>
+</div>
+
+</body>
+</html>
