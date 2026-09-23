@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="bn"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Register - INNOVA</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>.gold{color:#FFD700}.bg-gold{background:#FFD700}.border-gold{border-color:#FFD700}</style></head>
+<body class="bg-black text-white flex justify-center p-4">
+<div class="w-full max-w-md bg-zinc-900 border border-gold rounded-2xl p-6 mt-6">
+<h2 class="text-2xl font-bold text-center gold">CREATE ACCOUNT</h2>
+<p class="text-center text-xs text-gray-400 mt-1">Bismillahir Rahmanir Rahim</p>
+
+<input id="name" placeholder="Full Name" class="w-full mt-6 p-3 rounded-lg bg-black border border-zinc-700">
+<input id="mobile" placeholder="Mobile Number" class="w-full mt-3 p-3 rounded-lg bg-black border border-zinc-700">
+<input id="pass" type="password" placeholder="Password" class="w-full mt-3 p-3 rounded-lg bg-black border border-zinc-700">
+<input id="ref" placeholder="Referral ID (Optional)" class="w-full mt-3 p-3 rounded-lg bg-black border border-zinc-700">
+
+<button onclick="register()" id="btn" class="w-full mt-6 bg-gold text-black font-bold p-3 rounded-xl">Create Account</button>
+<p class="text-center text-sm mt-4">Have account? <a href="login.html" class="gold">Login</a></p>
+<p id="msg" class="text-center text-sm mt-3"></p>
+</div>
+
+<script>
+const supa = supabase.createClient("https://emnnltbzxzdutnisvzni.supabase.co","sb_publishable_HJLbbhiiukwMjbhNDKfZOw_JyLRXgXj");
+
+async function getNextId(){
+  let {data} = await supa.from('profiles').select('innova_id').order('innova_id',{ascending:false}).limit(1);
+  if(!data || data.length==0) return "000002";
+  let last = parseInt(data[0].innova_id);
+  let next = last + 1;
+  return String(next).padStart(6,'0');
+}
+
+async function register(){
+  let name=document.getElementById('name').value.trim();
+  let mobile=document.getElementById('mobile').value.trim();
+  let pass=document.getElementById('pass').value.trim();
+  let ref=document.getElementById('ref').value.trim();
+  if(!name||!mobile||!pass){alert("সব পূরণ করো");return;}
+  document.getElementById('btn').innerText="Creating...";
+  let nextId = await getNextId();
+  let {error} = await supa.from('profiles').insert({
+    innova_id: nextId,
+    full_name: name,
+    mobile: mobile,
+    password: pass,
+    referral_id: ref || null,
+    upline_id: ref || null,
+    role: 'member',
+    status: 'PENDING'
+  });
+  if(error){document.getElementById('msg').innerText=error.message; document.getElementById('btn').innerText="Create Account";}
+  else{
+    document.getElementById('msg').innerHTML=`✅ Account Created!<br>Your INNOVA ID: <b class='gold'>${nextId}</b><br>এখন Payment করতে হবে`;
+    setTimeout(()=>{localStorage.setItem('mobile',mobile); location.href='dashboard.html'},1500);
+  }
+}
+// যদি লিংক থেকে?ref=000002 আসে
+let urlRef = new URLSearchParams(location.search).get('ref');
+if(urlRef) document.getElementById('ref').value=urlRef;
+</script></body></html>
